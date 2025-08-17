@@ -30,6 +30,8 @@
     .btn.primary{border-color:transparent;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-container) 100%);color:var(--brand-on)}
     .btn.ghost{background:transparent;border-color:rgba(255,255,255,.16)}
 
+    
+
     section{padding:64px 0}
     .section-title{font-size:28px;margin:0 0 10px}
     .section-text{color:var(--muted);max-width:70ch}
@@ -80,6 +82,45 @@
 
     .badge{display:inline-flex;gap:8px;align-items:center;border:1px dashed rgba(255,255,255,.2);border-radius:999px;padding:8px 12px;color:var(--text);background:rgba(255,255,255,.04);font-size:12px}
 
+    /* Basis */
+.nav { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.nav-cta { display:flex; align-items:center; }
+
+/* Hamburger */
+.menu-toggle{
+  display:none; /* nur auf Mobile zeigen */
+  background:transparent; border:1px solid rgba(255,255,255,.16);
+  border-radius:10px; padding:8px 10px; cursor:pointer;
+}
+.menu-toggle .bar{
+  display:block; width:22px; height:2px; margin:4px 0; background:var(--text);
+}
+
+/* Mobile-Menü (Dropdown) */
+.mobile-nav{
+  display:grid;
+  gap:10px;
+  padding:12px 20px 16px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(18,18,18,.98);
+}
+.mobile-nav a{ padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+.mobile-nav a:last-child{ border-bottom:none; }
+
+/* RESPONSIVE: unter 860px wird's mobil */
+@media (max-width: 860px){
+  .nav-links{ display:none; }              /* Desktop-Links verstecken */
+  .nav-cta{ display:none; }                /* CTA in Mobile-Menü verschieben */
+  .menu-toggle{ display:inline-flex; gap:0; align-items:center; }
+  .logo{ gap:8px; }                        /* etwas kompakter */
+  .nav{ padding:10px 0; }                  /* weniger Höhe oben */
+}
+
+/* Extra: unter 360px Schrift minimal kleiner, mehr Luft */
+@media (max-width: 360px){
+  .nav a, .btn{ font-size:13px; }
+}
+
     @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr}
       .templates{grid-template-columns:repeat(2,1fr)}
@@ -91,19 +132,38 @@
 </head>
 <body>
   <header>
-    <div class="container nav">
-      <a href="#/" class="logo"><div class="logo-mark"></div> Visli</a>
-      <nav class="nav-links">
-        <a href="#/vorlagen">Vorlagen</a>
-        <a href="#/wie">Wie funktioniert’s</a>
-        <a href="#/preise">Preise</a>
-        <a href="#/faq">FAQ</a>
-      </nav>
-      <div>
-        <a class="btn ghost" href="#/download">App herunterladen</a>
-      </div>
+  <div class="container nav">
+    <a href="#/" class="logo"><div class="logo-mark"></div> Visli</a>
+
+    <!-- Toggle-Button nur auf Mobile sichtbar -->
+    <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+      <!-- einfacher Hamburger -->
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <!-- Desktop-Links -->
+    <nav class="nav-links">
+      <a href="#/vorlagen">Vorlagen</a>
+      <a href="#/wie">Wie funktioniert’s</a>
+      <a href="#/preise">Preise</a>
+      <a href="#/faq">FAQ</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn ghost" href="#/download">App herunterladen</a>
     </div>
-  </header>
+  </div>
+
+  <!-- Mobile-Dropdown -->
+  <nav id="mobile-nav" class="mobile-nav" hidden>
+    <a href="#/vorlagen">Vorlagen</a>
+    <a href="#/wie">Wie funktioniert’s</a>
+    <a href="#/preise">Preise</a>
+    <a href="#/faq">FAQ</a>
+    <a class="btn ghost" href="#/download" style="justify-content:center;margin-top:8px">App herunterladen</a>
+  </nav>
+</header>
+
 
   <main>
     <!-- HOME PAGE -->
@@ -423,6 +483,28 @@
       document.getElementById('y').textContent = new Date().getFullYear();
       show();
     });
+    // Mobile-Menü Toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    const closeMenu = () => {
+      mobileNav.hidden = true;
+      toggle?.setAttribute('aria-expanded','false');
+    };
+
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.hidden;
+      mobileNav.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Menü schließen bei Routenwechsel oder Link-Klick
+    window.addEventListener('hashchange', closeMenu);
+    mobileNav?.addEventListener('click', e => {
+      if(e.target.tagName === 'A') closeMenu();
+    });
+  });
   </script>
 </body>
 </html>

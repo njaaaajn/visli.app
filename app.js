@@ -87,4 +87,4 @@ if(normalized === path){ a.setAttribute('aria-current','page'); }
   window.addEventListener('resize', () => requestAnimationFrame(equalizeFAQ));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeFAQ);
 })();
-<script src="/app.js?v=faq-final" defer></script>
+

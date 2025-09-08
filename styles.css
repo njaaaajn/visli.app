@@ -54,47 +54,82 @@ section{padding:64px 0}
 .title{font-size:clamp(32px, 6vw, 48px);line-height:1.06;margin:10px 0 14px}
 .subtitle{color:var(--muted);font-size:clamp(16px, 2.3vw, 18px);max-width:52ch}
 .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-.mock{border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);position:relative}
+.mock{
+  display:flex;                 /* Kinder (z. B. .device) schön zentrieren */
+  align-items:center;
+  justify-content:center;
+
+  border-radius:var(--radius);
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
+
+  position:relative;
+  overflow:visible;             /* wichtig: Schatten/Notch nicht abschneiden */
+  padding:16px;                 /* kleiner Innenabstand statt harter Clip */
+}
+
 .mock-phone{aspect-ratio:9/19}
 
-/* Device frame (CSS-only) */
+/* Device frame (CSS-only, responsive) */
 .device{
-  --w: 320px;                 /* Basisbreite; skaliert über Elternlayout */
+  --w: 320px;               /* Zielbreite im Layout */
+  --radius: 36px;           /* Außenradius */
+  --bezel: 4.5%;            /* Innenabstand als % der kurzen Seite */
+  --notch-w: 38%;           /* Breite der Notch relativ zur Innenbreite */
+  --notch-h: 5.2%;          /* Höhe der Notch relativ zur Innenhöhe */
+
   width: min(100%, var(--w));
   aspect-ratio: 9 / 19.5;
-  border-radius: 36px;
-  background: #0b0b0b;
-  box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 6px #111;
   position: relative;
-  padding: 14px;              /* Rahmenstärke */
+  border-radius: var(--radius);
+  background: #0b0b0b;
+  /* außen + leichte Gehäusekante */
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45),
+    inset 0 0 0 6px #111;
 }
+
+/* Bildschirm als absolut positioniertes Element – kein padding-Shift */
+.device .screen{
+  position: absolute;
+  inset: var(--bezel);
+  width: auto; height: auto;
+  border-radius: calc(var(--radius) * 0.66);
+  object-fit: cover;
+  display:block;
+}
+
+/* Notch – prozentuale Maße, immer sauber mittig */
 .device::before{
-  /* Notch */
   content:"";
   position:absolute;
-  top:10px; left:50%;
-  width: 120px; height: 24px;
+  left:50%;
+  top: calc(var(--bezel) * 0.35);
+  width: calc(100% - (var(--bezel) * 2));
+  max-width: calc(var(--notch-w) * 1.0);
+  height: calc((100% - (var(--bezel) * 2)) * var(--notch-h) / 100);
   transform: translateX(-50%);
   background:#0b0b0b;
-  border-bottom-left-radius:14px;
-  border-bottom-right-radius:14px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  /* leichte Einfassung, damit es „eingelassen“ wirkt */
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
 }
+
+/* Lautsprecher-Slot (zentriert, klein) */
 .device::after{
-  /* Lautsprecher-Slot (dekorativ) */
   content:"";
   position:absolute;
-  top:16px; left:50%;
-  width: 48px; height: 6px;
+  left:50%;
+  top: calc(var(--bezel) * 0.9);
+  width: 16%;
+  height: 0.7%;
   transform: translateX(-50%);
   background:#1b1b1b;
-  border-radius:999px;
+  border-radius: 999px;
 }
-.device .screen{
-  display:block;
-  width:100%; height:100%;
-  object-fit: cover;
-  border-radius: 24px;
-}
+
 
 
 

@@ -769,6 +769,7 @@ html, body{ max-width: 100%; overflow-x: hidden; }
 
 /* FAQ Desktop: Karten gleich hoch, saubere Ausrichtung */
 /* FAQ Desktop: Karten sauber strecken und gleich hoch darstellen */
+
 @media (min-width: 901px){
   .grid-3{ align-items: stretch; }
   .grid-3 details.card{
@@ -778,8 +779,7 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   }
   .grid-3 details.card > summary{
     display: flex;
-    align-items: center; /* vertikale Zentrierung */
-    /* min-height wird per JS gesetzt */
+    align-items: center; /* min-height setzt das Script */
   }
 }
 

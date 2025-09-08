@@ -960,4 +960,18 @@ html, body{ max-width: 100%; overflow-x: hidden; }
 .card.price ul { margin-bottom: 0; }
 .card.price small { display: block; margin-top: 6px; }
 
+<style>
+  .price-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    gap: 1rem;
+  }
+  .price-footer small {
+    color: var(--muted);
+  }
+</style>
+
+
 

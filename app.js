@@ -51,38 +51,56 @@ if(normalized === path){ a.setAttribute('aria-current','page'); }
 })();
 
 // =======================
-// FAQ: immer nur 1 offen + Summary-Höhe angleichen
+// FAQ: robustes Akkordeon (1 offen) + gleiche Fragehöhe (Desktop)
 // =======================
 (function () {
-  // Wenn du das FAQ gezielt scopen willst, gib dem Container ein ID (#faq-list)
-  // und nimm stattdessen: const container = document.querySelector('#faq-list');
-  const container = document.querySelector('.grid-3');
-  if (!container) return;
+  const root = document.getElementById('faq');
+  if (!root) return;
 
-  const items = Array.from(container.querySelectorAll('details.card'));
+  const buttons = Array.from(root.querySelectorAll('.faq-q'));
 
-  // Alle geschlossen starten (falls Browser-State/Caching sie offen ließ)
-  items.forEach(d => { d.open = false; });
-
-  // Beim Öffnen eines Elements alle anderen schließen (ohne MediaQuery)
-  items.forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) items.forEach(o => { if (o !== d) o.open = false; });
-      requestAnimationFrame(equalizeFAQ);
+  function closeAll() {
+    buttons.forEach(btn => {
+      const id = btn.getAttribute('aria-controls');
+      const panel = id ? document.getElementById(id) : null;
+      btn.setAttribute('aria-expanded', 'false');
+      if (panel) panel.hidden = true;
     });
-  });
-
-  // Summary-Höhen angleichen (nur auf „echtem“ Desktop sinnvoll)
-  function equalizeFAQ() {
-    const summaries = items.map(i => i.querySelector('summary')).filter(Boolean);
-    summaries.forEach(s => s.style.minHeight = ''); // Reset
-    if (!window.matchMedia('(min-width: 901px)').matches) return;
-    let max = 0;
-    summaries.forEach(s => { max = Math.max(max, s.getBoundingClientRect().height); });
-    summaries.forEach(s => { s.style.minHeight = Math.ceil(max) + 'px'; });
   }
 
-  window.addEventListener('load', equalizeFAQ);
-  window.addEventListener('resize', () => requestAnimationFrame(equalizeFAQ));
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeFAQ);
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    closeAll();
+    if (!expanded) {
+      const id = btn.getAttribute('aria-controls');
+      const panel = id ? document.getElementById(id) : null;
+      btn.setAttribute('aria-expanded', 'true');
+      if (panel) panel.hidden = false;
+    }
+    requestAnimationFrame(equalizeQuestions);
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => toggle(btn));
+    // Tastatur ist bei <button> ohnehin barrierefrei (Enter/Space) – kein Extra nötig
+  });
+
+  // gleiche Höhe der Fragezeilen (nur Desktop)
+  function equalizeQuestions() {
+    const mqDesktop = window.matchMedia('(min-width: 901px)');
+    buttons.forEach(b => b.style.minHeight = ''); // reset
+    if (!mqDesktop.matches) return;
+
+    let max = 0;
+    buttons.forEach(b => { max = Math.max(max, b.getBoundingClientRect().height); });
+    const h = Math.ceil(max);
+    buttons.forEach(b => { b.style.minHeight = h + 'px'; });
+  }
+
+  window.addEventListener('load', equalizeQuestions);
+  window.addEventListener('resize', () => requestAnimationFrame(equalizeQuestions));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeQuestions);
+
+  // Startzustand: alles zu
+  closeAll();
 })();

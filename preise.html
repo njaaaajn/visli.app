@@ -12,6 +12,18 @@ FILE: /preise.html
   <link rel="alternate" hreflang="de" href="https://visli.app/preise.html" />
   <link rel="alternate" hreflang="en" href="https://visli.app/en/pricing.html" />
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .price-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      gap: 1rem;
+    }
+    .price-footer small {
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
 <header role="banner">
@@ -36,13 +48,13 @@ FILE: /preise.html
       <div class="card price">
         <h3>Kostenlos</h3>
         <div class="amount">0 €</div>
-        <small style="color:var(--muted)"> </small>
         <ul>
           <li>3 Momente gleichzeitig</li>
           <li>Vorlagenbibliothek (Basis)</li>
           <li>Alle Kernfunktionen</li>
         </ul>
-        <div class="cta" style="margin-top:14px">
+        <div class="price-footer">
+          <small>&nbsp;</small>
           <a class="btn" href="/download.html">Jetzt starten</a>
         </div>
       </div>
@@ -51,14 +63,13 @@ FILE: /preise.html
       <div class="card price" style="border:1px solid rgba(122,162,255,.5)">
         <h3>Pro</h3>
         <div class="amount">1 € / Monat</div>
-        <small style="color:var(--muted)">inkl. MwSt., monatlich kündbar</small>
         <ul>
           <li>Unbegrenzte Momente</li>
           <li>Alle Vorlagen</li>
           <li>Alle Vislis</li>
         </ul>
-        
-        <div class="cta" style="margin-top:14px">
+        <div class="price-footer">
+          <small>inkl. MwSt., monatlich kündbar</small>
           <a class="btn primary" href="/download.html">Pro holen</a>
         </div>
       </div>

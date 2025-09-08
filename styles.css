@@ -788,6 +788,71 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   details.card + details.card{ margin-top: 10px; }
 }
 
+/* ==== FAQ (Buttons statt <details>) ==== */
+.faq-grid { align-items: stretch; }
+.faq-item { display: flex; flex-direction: column; }
+
+.faq-q {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 18px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Chevron */
+.faq-q::after {
+  content: "";
+  width: 10px; height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .2s ease;
+  opacity: .9;
+}
+.faq-q[aria-expanded="true"]::after { transform: rotate(-135deg); }
+
+/* Open-State Header */
+.faq-q[aria-expanded="true"] {
+  background: rgba(255,255,255,.02);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Panel */
+.faq-a {
+  padding: 16px 18px;
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 15px;
+  border-top: none;
+}
+
+/* Card-Look beibehalten */
+.faq-item.card {
+  padding: 0;                 /* Card umschließt Button+Panel, daher kein Doppel-Padding */
+  overflow: hidden;
+}
+
+/* Desktop: gleiche Höhe der Fragenzeile */
+@media (min-width: 901px){
+  .faq-grid { align-items: stretch; }
+  .faq-item.card { height: 100%; }
+  .faq-q { /* min-height wird via JS gesetzt */ }
+}
+
+
 
 
 

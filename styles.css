@@ -235,3 +235,77 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   table{display:block; overflow-x:auto; white-space:nowrap}
   thead, tbody, tr{display:table; width:100%}
 }
+
+/* ===== FINAL OVERRIDE: device frame ===== */
+/* Card um das Gerät: zentriert, nichts abschneiden */
+.mock{
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--radius);
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:visible;           /* NICHT abschneiden */
+  padding:16px;
+}
+
+/* Max-Breite für das Phone im Hero */
+.mock-phone{ width:100%; max-width:360px; }
+
+/* Smartphone-Rahmen */
+.device{
+  width:100%;
+  aspect-ratio: 9 / 19.5;
+  position:relative;
+  border-radius:32px;
+  background:#0b0b0b;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 6px #111;
+}
+
+/* Bildschirmfläche: absolute + feste Insets in px (keine %-Ovale) */
+.device .screen{
+  position:absolute;
+  top:18px; bottom:22px;      /* oben/unten Rand */
+  left:14px; right:14px;      /* links/rechts Rand */
+  width:calc(100% - 28px);
+  height:calc(100% - 40px);
+  border-radius:24px;
+  object-fit:cover;
+  display:block;
+}
+
+/* Notch: mittig, einfache feste Maße */
+.device::before{
+  content:"";
+  position:absolute; left:50%;
+  top:18px;
+  width:38%; height:12px;
+  transform:translateX(-50%);
+  background:#0b0b0b;
+  border-bottom-left-radius:14px;
+  border-bottom-right-radius:14px;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset;
+}
+
+/* Lautsprecher-Slot */
+.device::after{
+  content:"";
+  position:absolute; left:50%;
+  top:26px;
+  width:24%; height:6px;
+  transform:translateX(-50%);
+  background:#1b1b1b;
+  border-radius:999px;
+}
+
+/* Auf sehr kleinen Phones etwas schmalere Ränder */
+@media (max-width: 420px){
+  .device .screen{
+    top:14px; bottom:18px; left:12px; right:12px;
+    width:calc(100% - 24px); height:calc(100% - 32px);
+    border-radius:22px;
+  }
+  .device::before{ top:14px; height:10px }
+  .device::after{ top:22px; height:5px }
+}
+

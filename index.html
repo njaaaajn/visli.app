@@ -3,549 +3,276 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Visli – Momente statt Tracker</title>
-  <meta name="description" content="Visli ist dein digitales Lebensarchiv. Momente statt endloser Tracker – privat, offline, ohne Cloud." />
-  <style>
-    :root{
-      --bg: #121212;
-      --card: #1E1E1E;
-      --muted: #E6E1E5;
-      --text: #E3E3E3;
-      --brand: #00C4CC;
-      --brand-container: #004F4A;
-      --brand-on: #001F24;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-    }
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1150px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:40;background:rgba(18,18,18,.9);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:.2px}
-    .logo-mark{width:26px;height:26px;border-radius:8px;background: var(--brand); box-shadow:0 4px 14px rgba(0,196,204,.4)}
-    .nav a{opacity:.9}
-    .nav-links{display:flex;gap:18px;font-size:14px;color:var(--muted)}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));color:var(--text);box-shadow:var(--shadow)}
-    .btn.primary{border-color:transparent;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-container) 100%);color:var(--brand-on)}
-    .btn.ghost{background:transparent;border-color:rgba(255,255,255,.16)}
+  <title>Visli – Momente statt Tracker | Digitales Lebensarchiv</title>
+  <meta name="description" content="Visli ist dein digitales Lebensarchiv: Momente statt endloser Tracker. Erstelle kleine, abgeschlossene Kapitel deines Lebens – privat, offline, ohne Cloud." />
+  <link rel="canonical" href="https://visli.app/" />
+  <link rel="alternate" hreflang="de" href="https://visli.app/" />
+  <link rel="alternate" hreflang="en" href="https://visli.app/en/" />
+  <meta name="theme-color" content="#121212">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-    
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://visli.app/">
+  <meta property="og:title" content="Visli – Momente statt Tracker">
+  <meta property="og:description" content="Digitales Lebensarchiv: Momente festhalten, abschließen, erinnern. Privat, offline, ohne Cloud.">
+  <meta property="og:image" content="https://visli.app/assets/og-image.jpg">
+  <meta property="og:locale" content="de_CH">
 
-    section{padding:64px 0}
-    .section-title{font-size:28px;margin:0 0 10px}
-    .section-text{color:var(--muted);max-width:70ch}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Visli – Momente statt Tracker">
+  <meta name="twitter:description" content="Privat. Offline. Ohne Cloud.">
+  <meta name="twitter:image" content="https://visli.app/assets/og-image.jpg">
 
-    .hero{padding:80px 0 40px}
-    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
-    .kicker{color:#b4b9c8;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-    .title{font-size:48px;line-height:1.06;margin:10px 0 14px}
-    .subtitle{color:var(--muted);font-size:18px;max-width:52ch}
-    .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-    .mock{border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);position:relative}
-    .mock-phone{aspect-ratio:9/19}
+  <!-- Styles -->
+  <link rel="preload" href="/styles.css" as="style">
+  <link rel="stylesheet" href="/styles.css">
 
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-    .card h3{margin:6px 0 8px;font-size:18px}
-    .card p{color:var(--muted);margin:0}
-
-    .templates{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .template{background:var(--card); border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:16px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
-    .tpl-title{font-size:14px;font-weight:600}
-    .tpl-thumb{height:88px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08)}
-    .tpl-desc{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.4}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .tag{font-size:12px;color:var(--text);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px 8px;background:rgba(255,255,255,.04)}
-
-    table{width:100%;border-collapse:separate;border-spacing:0 10px}
-    th,td{text-align:left;padding:12px 14px}
-    thead th{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em}
-    tbody tr{background:var(--card);border:1px solid rgba(255,255,255,.08)}
-    tbody tr td:first-child{border-top-left-radius:12px;border-bottom-left-radius:12px}
-    tbody tr td:last-child{border-top-right-radius:12px;border-bottom-right-radius:12px}
-
-    .pricing{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .price h3{font-size:22px;margin:6px 0}
-    .price .amount{font-size:36px;font-weight:800}
-    .price ul{list-style:none;margin:12px 0 0;padding:0;color:var(--muted)}
-    .price ul li{margin:6px 0}
-
-    details{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px}
-    summary{cursor:pointer;font-weight:600}
-    details p{color:var(--muted)}
-
-    footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
-
-    .page{display:none}
-    .page.active{display:block}
-
-    .badge{display:inline-flex;gap:8px;align-items:center;border:1px dashed rgba(255,255,255,.2);border-radius:999px;padding:8px 12px;color:var(--text);background:rgba(255,255,255,.04);font-size:12px}
-
-    /* Desktop: normale horizontale Navigation */
-.nav-links { display:flex; gap:18px; }
-.nav-cta { display:flex; }
-
-/* Mobile-Menü: standardmäßig versteckt */
-.mobile-nav { display:none; flex-direction:column; }
-
-/* Toggle-Button Styling */
-.menu-toggle{
-  display:none;
-  background:transparent; border:1px solid rgba(255,255,255,.16);
-  border-radius:10px; padding:8px 10px; cursor:pointer;
-}
-.menu-toggle .bar{
-  display:block; width:22px; height:2px; margin:4px 0; background:var(--text);
-}
-.logo-img {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px; /* falls du es leicht abgerundet willst */
-  box-shadow: 0 4px 14px rgba(0,196,204,.4); /* optional wie vorher */
-}
-
-/* Unter 860px: Links oben ausblenden, Hamburger + Mobile aktivieren */
-@media (max-width: 860px){
-  .nav-links{ display:none; }
-  .nav-cta{ display:none; }
-  .menu-toggle{ display:inline-flex; flex-direction:column; }
-  .mobile-nav[hidden]{ display:none; } /* HTML5 hidden */
-  .mobile-nav{ display:flex; gap:12px; padding:14px 20px; background:rgba(18,18,18,.98); }
-  .mobile-nav a{ padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08); }
-  .mobile-nav a:last-child{ border-bottom:none; }
-}
- @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
-      .templates{grid-template-columns:repeat(2,1fr)}
-      .grid-3{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
-      .title{font-size:38px}
-    }
-  </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Visli",
+    "operatingSystem": "Android",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Digitales Lebensarchiv: Momente statt Tracker. Privat, offline, ohne Cloud.",
+    "author": {"@type":"Organization","name":"Visli"},
+    "offers": [{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"EUR"
+    },{
+      "@type":"Offer",
+      "price":"1",
+      "priceCurrency":"EUR",
+      "category":"Pro Subscription",
+      "description":"Unbegrenzte Momente, Vorlagen & Designs"
+    }]
+  }
+  </script>
 </head>
 <body>
- <header>
-  <div class="container nav">
-    <a href="#/" class="logo">
-      <img src="ic_launcher-playstore.png" alt="Visli Logo" class="logo-img" />Visli
-    </a>
+  <a href="#main" class="visually-hidden-focusable">Zum Inhalt springen</a>
 
-    <!-- Toggle Button -->
-    <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
+  <header role="banner">
+    <div class="container nav">
+      <a href="/" class="logo" aria-label="Startseite">
+        <img src="/assets/logo.png" alt="Visli Logo" class="logo-img" width="26" height="26" />
+        <span>Visli</span>
+      </a>
 
-    <!-- Desktop-Links -->
-    <nav class="nav-links">
-      <a href="#/vorlagen">Vorlagen</a>
-      <a href="#/wie">Wie funktioniert’s</a>
-      <a href="#/preise">Preise</a>
-      <a href="#/faq">FAQ</a>
+      <!-- Desktop-Links -->
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="/vorlagen.html">Vorlagen</a>
+        <a href="/wie-funktioniert.html">Wie funktioniert’s</a>
+        <a href="/preise.html">Preise</a>
+        <a href="/faq.html">FAQ</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn ghost" href="/download.html">App herunterladen</a>
+      </div>
+
+      <!-- Language switch -->
+      <nav class="lang-switch" aria-label="Sprachauswahl">
+        <a href="/" aria-current="page">DE</a>
+        <span aria-hidden="true">/</span>
+        <a href="/en/">EN</a>
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile-Menü -->
+    <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile Navigation">
+      <a href="/vorlagen.html">Vorlagen</a>
+      <a href="/wie-funktioniert.html">Wie funktioniert’s</a>
+      <a href="/preise.html">Preise</a>
+      <a href="/faq.html">FAQ</a>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:6px 0 0">
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="/agb.html">AGB</a>
+      <a href="/kontakt.html">Kontakt</a>
+      <a href="/impressum.html">Impressum</a>
+      <a class="btn ghost" href="/download.html" style="justify-content:center;margin-top:8px">App herunterladen</a>
     </nav>
+  </header>
 
-    <div class="nav-cta">
-      <a class="btn ghost" href="#/download">App herunterladen</a>
-    </div>
-  </div>
-
-  <!-- Mobile-Menü -->
-  <nav id="mobile-nav" class="mobile-nav" hidden>
-    <a href="#/vorlagen">Vorlagen</a>
-    <a href="#/wie">Wie funktioniert’s</a>
-    <a href="#/preise">Preise</a>
-    <a href="#/faq">FAQ</a>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:6px 0 0">
-    <a href="#/datenschutz">Datenschutz</a>
-    <a href="#/agb">AGB</a>
-    <a href="#/kontakt">Kontakt</a>
-    <a href="#/impressum">Impressum</a>
-    <a class="btn ghost" href="#/download" style="justify-content:center;margin-top:8px">App herunterladen</a>
-</nav>
-</header>
-
-
-
-  <main>
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="kicker">Digitales Lebensarchiv</div>
-            <div class="badge">🚀 Coming Soon</div>
-            <h1 class="title">Nicht um dich zu verändern. <br/>Um dich festzuhalten.</h1>
-            <p class="subtitle">Momente statt endloser Tracker – privat, offline, ohne Cloud. Erstelle kleine, abgeschlossene Kapitel deines Lebens und sieh sie als klare, ansprechende Visualisierungen.</p>
-            <div class="cta">
-              <a class="btn primary" href="#">🚀 Coming Soon</a>
-              <!--<a class="btn primary" href="#/vorlagen">Vorlagen entdecken</a>-->
-              <a class="btn" href="#/wie">So funktioniert’s</a>
-            </div>
-            <div style="margin-top:14px"><span class="badge">🔒 Keine Cloud · Kein Login · Keine Werbung</span></div>
+  <main id="main" role="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="kicker">Digitales Lebensarchiv</p>
+          <div class="badge">🚀 Coming Soon</div>
+          <h1 class="title">Nicht um dich zu verändern. <br>Um dich festzuhalten.</h1>
+          <p class="subtitle">Momente statt endloser Tracker – privat, offline, ohne Cloud. Erstelle kleine, abgeschlossene Kapitel deines Lebens und sieh sie als klare, ansprechende Visualisierungen.</p>
+          <div class="cta">
+            <a class="btn primary" href="mailto:hello@visli.app?subject=Visli%20Warteliste">Warteliste</a>
+            <a class="btn" href="/wie-funktioniert.html">So funktioniert’s</a>
           </div>
-          <div class="mock mock-phone" aria-hidden="true">
-            <!-- Simple SVG chart placeholder -->
-            <svg viewBox="0 0 320 640" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" role="img" aria-label="App Vorschau">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#1b2240"/>
-                  <stop offset="100%" stop-color="#0a0d16"/>
-                </linearGradient>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#g1)"/>
-              <g transform="translate(36,420)">
-                <rect x="0" y="-120" width="28" height="120" rx="6" fill="#7aa2ff"/>
-                <rect x="44" y="-200" width="28" height="200" rx="6" fill="#a78bfa"/>
-                <rect x="88" y="-160" width="28" height="160" rx="6" fill="#86efac"/>
-                <rect x="132" y="-240" width="28" height="240" rx="6" fill="#ffb86b"/>
-                <rect x="176" y="-180" width="28" height="180" rx="6" fill="#7aa2ff"/>
-                <rect x="220" y="-90" width="28" height="90" rx="6" fill="#a78bfa"/>
-              </g>
-              <text x="24" y="80" fill="#c9d1e6" font-size="14">Visli – Vorschau</text>
-              <text x="24" y="110" fill="#98a0b5" font-size="12">🚀 Coming Soon</text>
-            </svg>
-          </div>
+          <div style="margin-top:14px"><span class="badge">🔒 Keine Cloud · Kein Login · Keine Werbung</span></div>
         </div>
-      </section>
-
-      <!-- WAS IST VISLI -->
-      <section id="was-ist" class="section">
-        <div class="container">
-          <h2 class="section-title">Momente statt endloser Tracker</h2>
-          <p class="section-text">Visli ist ein Ort, an dem du einzelne Lebensmomente festhältst – nicht zur Analyse oder Optimierung, sondern als kleine, abgeschlossene Kapitel. Eine Zahl, ein Wort, ein Gefühl – alles kann ein Augenblick sein. Am Ende steht ein visuelles Diagramm, das sagt: „Das war mein Moment.“</p>
+        <div class="mock mock-phone" aria-hidden="true">
+          <!-- Phone Mockup / Placeholder -->
+          <img src="/assets/phone-mock@2x.png" alt="" loading="eager" width="320" height="640">
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- VORLAGENBIBLIOTHEK (Teaser) -->
-      <section>
-        <div class="container">
-          <h2 class="section-title">Vorlagenbibliothek – Inspiration auf Knopfdruck</h2>
-          <p class="section-text">Starte schneller mit Vorlagen wie „30 Tage Dankbarkeit“, „Saison-Statistik“ oder „Projektabschluss“. Jede Vorlage bringt eine klare Struktur, die du anpassen kannst.</p>
+    <!-- WAS IST VISLI -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Momente statt endloser Tracker</h2>
+        <p class="section-text">Visli ist ein Ort, an dem du einzelne Lebensmomente festhältst – nicht zur Analyse oder Optimierung, sondern als kleine, abgeschlossene Kapitel. Eine Zahl, ein Wort, ein Gefühl – alles kann ein Augenblick sein. Am Ende steht ein visuelles Diagramm, das sagt: „Das war mein Moment.“</p>
+      </div>
+    </section>
 
-          <div class="templates">
-            <div class="template">
-              <div class="tpl-title">Erster Angelausflug</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Ein Tag – Fänge mit Art & Gewicht.</div>
-              <div class="tags"><span class="tag">Kategorien: Was genau + Wie viel</span><span class="tag">Diagramm: Balken</span></div>
-            </div>
-            <div class="template">
-              <div class="tpl-title">Saison-Statistik (Tore)</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Saison – Tore pro Spieltag.</div>
-              <div class="tags"><span class="tag">Kategorien: Wann + Wie viel</span><span class="tag">Diagramm: Balkenverlauf</span></div>
-            </div>
-            <div class="template">
-              <div class="tpl-title">Projektabschluss (Meilensteine)</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Projekt – Meilensteine mit Datum.</div>
-              <div class="tags"><span class="tag">Kategorien: Wann + Was genau</span><span class="tag">Diagramm: Timeline</span></div>
-            </div>
-            <div class="template">
-              <div class="tpl-title">Ferien-Ausgabenübersicht</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Urlaub – Ausgaben nach Kategorie.</div>
-              <div class="tags"><span class="tag">Kategorien: Was genau + Wie viel</span><span class="tag">Diagramm: Kreis</span></div>
-            </div>
-            <div class="template">
-              <div class="tpl-title">Erste Worte (Kind)</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Erste Wörter mit Datum.</div>
-              <div class="tags"><span class="tag">Kategorien: Wann + Was genau</span><span class="tag">Diagramm: Timeline</span></div>
-            </div>
-            <div class="template">
-              <div class="tpl-title">Wettkampf-Ergebnisse</div>
-              <div class="tpl-thumb"></div>
-              <div class="tpl-desc">Wettkampf – Distanz & Zeit.</div>
-              <div class="tags"><span class="tag">Kategorien: Wie viel + Wie stark</span><span class="tag">Diagramm: Scatter</span></div>
-            </div>
-          </div>
-
-          <div class="cta" style="margin-top:16px">
-            <a class="btn primary" href="#/vorlagen">Alle Vorlagen ansehen</a>
-            <a class="btn" href="#/wie">So funktioniert’s</a>
-          </div>
+    <!-- VORLAGEN TEASER -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Vorlagenbibliothek – Inspiration auf Knopfdruck</h2>
+        <p class="section-text">Starte schneller mit Vorlagen wie „30 Tage Dankbarkeit“, „Saison-Statistik“ oder „Projektabschluss“. Jede Vorlage bringt eine klare Struktur, die du anpassen kannst.</p>
+        <div class="templates">
+          <article class="template">
+            <div class="tpl-title">Erster Angelausflug</div>
+            <div class="tpl-thumb"><img src="/assets/tpl-1.png" alt="Vorlage Angelausflug" loading="lazy" width="320" height="176"></div>
+            <div class="tpl-desc">Ein Tag – Fänge mit Art & Gewicht.</div>
+            <div class="tags"><span class="tag">Was genau + Wie viel</span><span class="tag">Diagramm: Balken</span></div>
+          </article>
+          <article class="template">
+            <div class="tpl-title">Saison-Statistik (Tore)</div>
+            <div class="tpl-thumb"><img src="/assets/tpl-2.png" alt="Vorlage Saison-Statistik" loading="lazy" width="320" height="176"></div>
+            <div class="tpl-desc">Saison – Tore pro Spieltag.</div>
+            <div class="tags"><span class="tag">Wann + Wie viel</span><span class="tag">Diagramm: Balkenverlauf</span></div>
+          </article>
+          <article class="template">
+            <div class="tpl-title">Projektabschluss (Meilensteine)</div>
+            <div class="tpl-thumb"><img src="/assets/tpl-3.png" alt="Vorlage Projektabschluss" loading="lazy" width="320" height="176"></div>
+            <div class="tpl-desc">Projekt – Meilensteine mit Datum.</div>
+            <div class="tags"><span class="tag">Wann + Was genau</span><span class="tag">Diagramm: Timeline</span></div>
+          </article>
+          <article class="template">
+            <div class="tpl-title">Ferien-Ausgaben</div>
+            <div class="tpl-thumb"><img src="/assets/tpl-4.png" alt="Vorlage Ausgabenübersicht" loading="lazy" width="320" height="176"></div>
+            <div class="tpl-desc">Urlaub – Ausgaben nach Kategorie.</div>
+            <div class="tags"><span class="tag">Was genau + Wie viel</span><span class="tag">Diagramm: Kreis</span></div>
+          </article>
         </div>
-      </section>
-
-      <!-- ABGRENZUNG -->
-      <section>
-        <div class="container">
-          <h2 class="section-title">Warum Visli anders ist</h2>
-          <table aria-label="Vergleich Visli vs andere Apps">
-            <thead><tr><th>Visli</th><th>Andere Apps</th></tr></thead>
-            <tbody>
-              <tr><td>Abschließbare Momente</td><td>Dauerhafte Tracker</td></tr>
-              <tr><td>Kein Login, keine Cloud</td><td>Konten, Werbung, Datensync</td></tr>
-              <tr><td>Visualisierung als Erinnerung</td><td>Visualisierung zur Analyse</td></tr>
-              <tr><td>Freie Eingaben (Zahl, Text, Gefühl)</td><td>Vordefinierte Ziele & Regeln</td></tr>
-              <tr><td>Optionales Teilen</td><td>Rankings & soziale Vergleiche</td></tr>
-              <tr><td>Kein Druck, kein Zwang</td><td>Gamification & tägliche Ziele</td></tr>
-            </tbody>
-          </table>
+        <div class="cta" style="margin-top:16px">
+          <a class="btn primary" href="/vorlagen.html">Alle Vorlagen ansehen</a>
+          <a class="btn" href="/wie-funktioniert.html">So funktioniert’s</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- PRIVACY -->
-      <section>
-        <div class="container">
-          <h2 class="section-title">Deine Daten bleiben bei dir</h2>
+    <!-- ABGRENZUNG -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Warum Visli anders ist</h2>
+        <table aria-label="Vergleich Visli vs andere Apps">
+          <caption class="visually-hidden">Differenzen auf einen Blick</caption>
+          <thead><tr><th scope="col">Visli</th><th scope="col">Andere Apps</th></tr></thead>
+          <tbody>
+            <tr><td>Abschließbare Momente</td><td>Dauerhafte Tracker</td></tr>
+            <tr><td>Kein Login, keine Cloud</td><td>Konten, Werbung, Datensync</td></tr>
+            <tr><td>Visualisierung als Erinnerung</td><td>Visualisierung zur Analyse</td></tr>
+            <tr><td>Freie Eingaben (Zahl, Text, Gefühl)</td><td>Vordefinierte Ziele & Regeln</td></tr>
+            <tr><td>Optionales Teilen</td><td>Rankings & soziale Vergleiche</td></tr>
+            <tr><td>Kein Druck, kein Zwang</td><td>Gamification & tägliche Ziele</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PRIVACY USP -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Deine Daten bleiben bei dir</h2>
         <p class="section-text">Visli funktioniert komplett offline. Keine Cloud, kein Tracking, keine Werbung. Alles bleibt auf deinem Gerät – nur du entscheidest, ob du etwas teilen möchtest.</p>
-          <div class="cta" style="margin-top:8px">
-            <span class="badge">🔐 Offline</span>
-            <span class="badge">🗂️ Lokal gespeichert</span>
-            <span class="badge">🚫 Keine Werbung</span>
+        <div class="cta" style="margin-top:8px">
+          <span class="badge">🔐 Offline</span>
+          <span class="badge">🗂️ Lokal gespeichert</span>
+          <span class="badge">🚫 Keine Werbung</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREISE TEASER -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Preise</h2>
+        <div class="pricing">
+          <div class="card price">
+            <h3>Kostenlos</h3>
+            <div class="amount">0 €</div>
+            <ul>
+              <li>3 Momente gleichzeitig</li>
+              <li>Vorlagenbibliothek (Basis)</li>
+              <li>Alle Kernfunktionen</li>
+            </ul>
+            <small style="color:var(--muted)">inkl. MwSt., jederzeit kündbar</small>
+            <div class="cta" style="margin-top:14px"><a class="btn" href="/download.html">Jetzt starten</a></div>
+          </div>
+          <div class="card price" style="border:1px solid rgba(122,162,255,.5)">
+            <h3>Pro</h3>
+            <div class="amount">1 € / Monat</div>
+            <ul>
+              <li>Unbegrenzte Momente</li>
+              <li>Alle Vorlagen & Designs</li>
+              <li>Geplanter Abschluss-Flow</li>
+            </ul>
+            <small style="color:var(--muted)">inkl. MwSt., monatlich kündbar</small>
+            <div class="cta" style="margin-top:14px"><a class="btn primary" href="/preise.html">Pro holen</a></div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- PREISE (Teaser) -->
-      <section>
-        <div class="container">
-          <h2 class="section-title">Preise</h2>
-          <div class="pricing">
-            <div class="card price">
-              <h3>Kostenlos</h3>
-              <div class="amount">0 €</div>
-              <ul>
-                <li>3 Momente gleichzeitig</li>
-                <li>Vorlagenbibliothek (Basis)</li>
-                <li>Alle Kernfunktionen</li>
-              </ul>
-              <div class="cta" style="margin-top:14px"><a class="btn" href="#/download">Jetzt starten</a></div>
-            </div>
-            <div class="card price" style="border:1px solid rgba(122,162,255,.5)">
-              <h3>Pro</h3>
-              <div class="amount">1 € / Monat</div>
-              <ul>
-                <li>Unbegrenzte Momente</li>
-                <li>Alle Vorlagen & Designs</li>
-                <li>Geplanter Abschluss-Flow</li>
-              </ul>
-              <div class="cta" style="margin-top:14px"><a class="btn primary" href="#/preise">Pro holen</a></div>
-            </div>
-          </div>
+    <!-- FAQ TEASER -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="grid-3">
+          <details class="card"><summary>Brauche ich einen Account?</summary><p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p></details>
+          <details class="card"><summary>Was ist ein „Moment“?</summary><p>Ein Moment ist ein bewusst begrenzter Zeitraum mit einem klaren Abschluss – kein Endlos-Tracker.</p></details>
+          <details class="card"><summary>Kann ich etwas teilen oder exportieren?</summary><p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p></details>
         </div>
-      </section>
+        <div class="cta" style="margin-top:14px"><a class="btn" href="/faq.html">Alle Fragen</a></div>
+      </div>
+    </section>
 
-      <!-- FAQ (Teaser) -->
-      <section>
-        <div class="container">
-          <h2 class="section-title">FAQ</h2>
-          <div class="grid-3">
-            <details class="card"><summary>Brauche ich einen Account?</summary><p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p></details>
-            <details class="card"><summary>Was ist ein „Moment“?</summary><p>Ein Moment ist ein abgeschlossener Tracker – ein kleines Kapitel deines Lebens, mit einem klaren Anfang und Ende.</p></details>
-            <details class="card"><summary>Kann ich etwas teilen oder exportieren?</summary><p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p></details>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- SUBPAGES -->
-    <div id="vorlagen" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Vorlagenbibliothek</h2>
-          <p class="section-text">Starte mit einer Vorlage und passe sie an deinen Moment an.</p>
-
-          <div class="templates">
-            <div class="template"><div class="tpl-title">Erster Angelausflug</div><div class="tpl-thumb"></div><div class="tpl-desc">Ein Tag – Fänge mit Art & Gewicht.</div><div class="tags"><span class="tag">Kategorien: Was genau + Wie viel</span><span class="tag">Diagramm: Balken</span></div></div>
-            <div class="template"><div class="tpl-title">Saison-Statistik (Tore)</div><div class="tpl-thumb"></div><div class="tpl-desc">Saison – Tore pro Spieltag.</div><div class="tags"><span class="tag">Kategorien: Wann + Wie viel</span><span class="tag">Diagramm: Balkenverlauf</span></div></div>
-            <div class="template"><div class="tpl-title">Projektabschluss (Meilensteine)</div><div class="tpl-thumb"></div><div class="tpl-desc">Projekt – Meilensteine mit Datum.</div><div class="tags"><span class="tag">Kategorien: Wann + Was genau</span><span class="tag">Diagramm: Timeline</span></div></div>
-            <div class="template"><div class="tpl-title">Ferien-Ausgabenübersicht</div><div class="tpl-thumb"></div><div class="tpl-desc">Urlaub – Ausgaben nach Kategorie.</div><div class="tags"><span class="tag">Kategorien: Was genau + Wie viel</span><span class="tag">Diagramm: Kreis</span></div></div>
-            <div class="template"><div class="tpl-title">Erste Worte (Kind)</div><div class="tpl-thumb"></div><div class="tpl-desc">Erste Wörter mit Datum.</div><div class="tags"><span class="tag">Kategorien: Wann + Was genau</span><span class="tag">Diagramm: Timeline</span></div></div>
-            <div class="template"><div class="tpl-title">Wettkampf-Ergebnisse</div><div class="tpl-thumb"></div><div class="tpl-desc">Wettkampf – Distanz & Zeit.</div><div class="tags"><span class="tag">Kategorien: Wie viel + Wie stark</span><span class="tag">Diagramm: Scatter</span></div></div>
-          </div>
-
-          <div class="cta" style="margin-top:16px">
-            <a class="btn" href="#/">Zur Startseite</a>
-            <a class="btn primary" href="#/download">App herunterladen</a>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="wie" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Wie funktioniert’s?</h2>
-          <div class="grid-3">
-            <div class="card"><div class="badge">1 · Moment erstellen</div><h3>Wähle oder gestalte</h3><p>Wähle aus der Vorlagenbibliothek oder bringe deine eigene Idee zum Leben – lege <strong>Kategorie</strong>, <strong>Einheit</strong> und <strong>Titel</strong> fest.</p></div>
-            <div class="card"><div class="badge">2 · Augenblick festhalten</div><h3>Schnell & intuitiv</h3><p>Füge passende Daten über das <strong>Quick-Add-Menü</strong> hinzu – deine Visualisierung aktualisiert sich <strong>sofort</strong>.</p></div>
-            <div class="card"><div class="badge">3 · Abschließen & erinnern</div><h3>Klarer Abschluss</h3><p>Wenn dein Moment vorbei ist, erhältst du ein fertiges Diagramm – ein Kapitel, das du jederzeit wieder ansehen kannst.</p></div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="preise" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Preise</h2>
-          <div class="pricing">
-            <div class="card price"><h3>Kostenlos</h3><div class="amount">0 €</div><ul><li>3 Momente gleichzeitig</li><li>Vorlagenbibliothek (Basis)</li><li>Alle Kernfunktionen</li></ul><div class="cta" style="margin-top:14px"><a class="btn" href="#/download">Jetzt starten</a></div></div>
-            <div class="card price" style="border:1px solid rgba(122,162,255,.5)"><h3>Pro</h3><div class="amount">1 € / Monat</div><ul><li>Unbegrenzte Momente</li><li>Alle Vorlagen & Designs</li><li>Geplanter Abschluss-Flow</li></ul><div class="cta" style="margin-top:14px"><a class="btn primary" href="#/download">Pro holen</a></div></div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="faq" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">FAQ</h2>
-          <div class="grid-3">
-            <details class="card" open><summary>Brauche ich einen Account?</summary><p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p></details>
-            <details class="card"><summary>Was ist ein „Moment“?</summary><p>Ein Moment ist ein abgeschlossener Tracker – ein kleines Kapitel deines Lebens, mit einem klaren Anfang und Ende.</p></details>
-            <details class="card"><summary>Kann ich etwas teilen oder exportieren?</summary><p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p></details>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="agb" class="page">
-  <section>
-    <div class="container">
-     <h2>Allgemeine Geschäftsbedingungen (AGB)</h1>
-      <p><strong>Anbieterin:</strong> [Name/Firma], [Adresse], [E-Mail]</p>
-<h2>Leistungen</h2>
-<p>Visli bietet eine kostenlose Basisnutzung sowie ein optionales Premium-Abo.</p>
-<h2>Preise & Abrechnung</h2>
-<p>Premium-Abo: [Preis]/Monat, Abrechnung über Google Play. Verlängert sich automatisch,
-kündbar jederzeit im Google-Konto. Erstattungen gemäß Richtlinien von Google Play.</p>
-<h2>Nutzung</h2>
-<p>Kein Missbrauch, keine Rechtsverstöße. Inhalte bleiben beim Nutzer.</p>
-<h2>Rechte</h2>
-<p>App und Designs sind urheberrechtlich geschützt.</p>
-<h2>Haftung & Verfügbarkeit</h2>
-<p>App „as is“, keine Zusage ständiger Verfügbarkeit.</p>
-<h2>Schlussbestimmungen</h2>
-<p>Anwendbares Recht: Schweiz. Gerichtsstand: [Ort]. Änderungen vorbehalten.</p>
-<p><em>Stand: [17.08.2025]</em></p>
-    </div>
-  </section>
-</div>
-
-
-    <div id="datenschutz" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Datenschutz</h2>
-          <p class="section-text">Visli funktioniert komplett offline. Keine Cloud, kein Tracking, keine Werbung. Deine Daten bleiben auf deinem Gerät. Optionaler Export/Teilen erzeugt lokale Bilder-Dateien; es findet kein Server-Upload statt.</p>
-          <p><strong>Verantwortlich:</strong> [Name/Firma], [Adresse], [E-Mail]</p>
-          <p><strong>Geltungsbereich:</strong> Diese Erklärung gilt für die mobile App „Visli“.</p>
-          <h2>Welche Daten verarbeitet die App?</h2>
-          <p>Visli speichert deine Inhalte ausschließlich <strong>lokal auf deinem Gerät</strong>. Es erfolgt
-          keine Kontoerstellung, keine Cloud-Synchronisierung und kein serverseitiges Tracking.</p>
-          <h2>Netzwerk & Berechtigungen</h2>
-          <p>Die App kann Links im Browser öffnen und E-Mails zum Feedback vorbereiten. Weitere
-          Berechtigungen werden nur genutzt, wenn sie für eine Funktion erforderlich sind und
-          explizit abgefragt werden.</p>
-          <h2>Drittanbieter</h2>
-          <p>Keine Analyse-/Werbedienste.</p>
-          <h2>Rechtsgrundlagen</h2>
-          <p>Schweizer Datenschutzrecht (revDSG). Sofern anwendbar: DSGVO Art. 6 Abs. 1 lit. b/f.</p>
-          <h2>Speicherdauer</h2>
-          <p>Bis zur Löschung durch dich oder Deinstallation der App.</p>
-          <h2>Deine Rechte</h2>
-          <p>Auskunft, Berichtigung, Löschung etc. Anfragen an: [E-Mail]. Zuständig in der Schweiz: EDÖB.</p>
-          <p><em>Stand: [17.08.2025]</em></p>
-        </div>
-      </section>
-    </div>
-
-    <div id="impressum" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Impressum</h2>
-          <p class="section-text">Diese Seite ist ein Prototyp.</p>
-        </div>
-      </section>
-    </div>
-
-    <div id="kontakt" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">Kontakt</h2>
-          <p class="section-text">Schreibe uns eine Nachricht.</p>
-          <div class="card" style="max-width:640px">
-            <p style="margin:0 0 8px;color:#cfd4e4">Formular</p>
-            <div style="display:grid;gap:10px">
-              <input placeholder="Dein Name" style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)"/>
-              <input placeholder="Deine E-Mail" style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)"/>
-              <textarea rows="5" placeholder="Nachricht" style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)"></textarea>
-              <button class="btn primary" style="justify-content:center">Senden (bald)</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="download" class="page">
-      <section>
-        <div class="container">
-          <h2 class="section-title">App herunterladen</h2>
-          <p class="section-text">Sobald verfügbar, hier herunterladen.</p>
-          <div class="cta" style="gap:16px">
-            <a class="btn primary" href="#">Google Play (bald)</a>
-          </div>
-        </div>
-      </section>
-    </div>
+    <section>
+      <div class="container" style="text-align:center">
+        <p class="section-text" style="margin:0 auto">Visli ist nicht da, um dich zu verändern. Es ist da, um dich festzuhalten.</p>
+      </div>
+    </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
       <div>© <span id="y"></span> Visli · Entwickelt in der Schweiz ❤️</div>
-      <div class="nav-links">
-        <a href="#/datenschutz">Datenschutz</a>
-        <a href="#/agb">AGB</a>
-        <a href="#/kontakt">Kontakt</a>
-        <a href="#/impressum">Impressum</a>
-      </div>
+      <nav class="nav-links" aria-label="Footer Navigation">
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/agb.html">AGB</a>
+        <a href="/kontakt.html">Kontakt</a>
+        <a href="/impressum.html">Impressum</a>
+      </nav>
     </div>
   </footer>
 
+  <script src="/app.js" defer></script>
   <script>
-    // Simple hash-based router for subpages
-    const pages = Array.from(document.querySelectorAll('.page'));
-    function show(route){
-      const hash = (route || location.hash || '#/').replace('#','');
-      const key = hash === '/' ? 'home' : hash.slice(1);
-      pages.forEach(p => p.classList.toggle('active', p.id === key));
-      // scroll to top on route change
-      window.scrollTo({top:0, behavior:'instant'});
-    }
-    window.addEventListener('hashchange', () => show());
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('y').textContent = new Date().getFullYear();
-      show();
     });
-    document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.querySelector('.menu-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-
-  toggle?.addEventListener('click', () => {
-    const isHidden = mobileNav.hasAttribute('hidden');
-    if (isHidden) {
-      mobileNav.removeAttribute('hidden');
-      toggle.setAttribute('aria-expanded','true');
-    } else {
-      mobileNav.setAttribute('hidden','');
-      toggle.setAttribute('aria-expanded','false');
-    }
-  });
-
-  // Menü automatisch schließen bei Linkklick
-  mobileNav?.addEventListener('click', e => {
-    if(e.target.tagName === 'A'){
-      mobileNav.setAttribute('hidden','');
-      toggle.setAttribute('aria-expanded','false');
-    }
-  });
-});
-
   </script>
 </body>
 </html>

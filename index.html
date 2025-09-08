@@ -309,17 +309,46 @@
     </section>
 
     <!-- FAQ TEASER -->
-    <section>
-      <div class="container">
-        <h2 class="section-title">FAQ</h2>
-        <div class="grid-3">
-          <details class="card"><summary>Brauche ich einen Account?</summary><p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p></details>
-          <details class="card"><summary>Was ist ein „Moment“?</summary><p>Ein Moment ist ein bewusst begrenzter Zeitraum mit einem klaren Abschluss – kein Endlos-Tracker.</p></details>
-          <details class="card"><summary>Kann ich etwas teilen oder exportieren?</summary><p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p></details>
+   <section>
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+
+    <!-- Neues, robustes Akkordeon -->
+    <div class="grid-3 faq-grid" id="faq">
+      <article class="faq-item card">
+        <button class="faq-q" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+          Brauche ich einen Account?
+        </button>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+          <p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p>
         </div>
-        <div class="cta" style="margin-top:14px"><a class="btn" href="/faq.html">Alle Fragen</a></div>
-      </div>
-    </section>
+      </article>
+
+      <article class="faq-item card">
+        <button class="faq-q" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+          Was ist ein „Moment“?
+        </button>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+          <p>Ein Moment ist ein bewusst begrenzter Zeitraum mit einem klaren Abschluss – kein Endlos-Tracker.</p>
+        </div>
+      </article>
+
+      <article class="faq-item card">
+        <button class="faq-q" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+          Kann ich etwas teilen oder exportieren?
+        </button>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+          <p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="cta" style="margin-top:14px">
+      <a class="btn" href="/faq.html">Alle Fragen</a>
+    </div>
+  </div>
+</section>
+
 
     <section>
       <div class="container" style="text-align:center">

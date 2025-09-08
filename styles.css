@@ -751,6 +751,23 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   .announcement{ position: relative !important; top: auto !important; }
 }
 
+/* Templates: quadratische Thumbnails für 1080x1080 */
+.tpl-thumb{
+  height: auto;                  /* überschreibt alte fixe Höhe */
+  aspect-ratio: 1 / 1;           /* immer quadratisch */
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.tpl-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;              /* füllt den Quadrat-Rahmen schön aus */
+  display: block;
+}
+
+
 
 
 

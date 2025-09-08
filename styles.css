@@ -309,3 +309,72 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .device::after{ top:22px; height:5px }
 }
 
+/* ==========================
+   Announcement Banner (responsive)
+   ========================== */
+.announcement{
+  background: var(--brand-2);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  position: sticky;          /* Desktop klebend */
+  top: 0;
+  z-index: 1000;             /* über dem Header */
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+}
+.announcement .inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  flex-wrap: wrap;           /* erlaubt Zeilenumbruch auf Tablets */
+}
+.announcement .info{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  line-height: 1.25;
+  flex: 1 1 auto;
+}
+.btn.small{                  /* kleiner CTA im Banner */
+  padding: 8px 12px;
+  font-size: .92rem;
+  line-height: 1;
+}
+
+/* leichte Typoverkleinerung bei schmaleren Viewports */
+@media (max-width: 920px){
+  .announcement .info{ font-size: 14px; }
+}
+
+/* Smartphone-Optimierung */
+@media (max-width: 720px){
+  .announcement{
+    position: relative;      /* Banner nicht klebend, verhindert Überschneidung mit sticky Header */
+    top: auto;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px)); /* Notch-Safe-Area */
+    padding-bottom: 8px;
+  }
+  .announcement .inner{
+    flex-direction: column;  /* Text über Button */
+    align-items: stretch;
+    gap: 8px;
+  }
+  .announcement .info{
+    font-size: 14px;
+    white-space: normal;     /* sicherstellen, dass umgebrochen wird */
+  }
+  .announcement .btn{
+    width: 100%;             /* Vollbreite-Button auf Phones */
+    justify-content: center;
+    padding: 12px 14px;
+    font-weight: 700;
+  }
+}
+
+/* ganz kleine Geräte */
+@media (max-width: 360px){
+  .announcement .info{ font-size: 13px; }
+}
+
+

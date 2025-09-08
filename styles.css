@@ -190,6 +190,20 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .nav-links{display:none}
   .nav-cta{display:none}
   .menu-toggle{display:inline-flex;flex-direction:column}
+
+  /* 👉 WICHTIG: Mobile-Menü sichtbar machen, wenn nicht hidden */
+  .mobile-nav{
+    display:flex;                   /* war global: none */
+    flex-direction:column;
+    gap:12px;
+    padding:14px 20px;
+    background:rgba(18,18,18,.98);
+  }
+  .mobile-nav a{
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .mobile-nav a:last-child{ border-bottom:none }
 }
 
 /* Compact header & hero on small phones */
@@ -205,6 +219,7 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .cta .btn{width:100%; justify-content:center} /* full-width CTAs */
   .mock-phone{margin-top:12px}
 }
+
 
 /* Templates: 1 column on narrow screens */
 @media (max-width: 700px){

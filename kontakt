@@ -1,0 +1,40 @@
+<!-- =========================================
+FILE: /kontakt.html
+========================================= -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kontakt | Visli</title>
+<meta name="description" content="Kontakt zu Visli: Fragen, Feedback oder rechtliche Anliegen." />
+<link rel="canonical" href="https://visli.app/kontakt.html" />
+<link rel="alternate" hreflang="de" href="https://visli.app/kontakt.html" />
+<link rel="alternate" hreflang="en" href="https://visli.app/en/contact.html" />
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header role="banner">
+<div class="container nav">
+<a href="/" class="logo"><img src="/assets/logo.png" alt="Visli Logo" class="logo-img" />Visli</a>
+<nav class="nav-links"><a href="/faq.html">FAQ</a><a href="/datenschutz.html">Datenschutz</a></nav>
+</div>
+</header>
+<main id="main">
+<section class="container">
+<h1 class="section-title">Kontakt</h1>
+<p class="section-text">Schreibe uns bei Fragen, Feedback oder rechtlichen Anliegen.</p>
+<div class="card" style="max-width:640px">
+<form method="post" action="#" style="display:grid;gap:10px">
+<input type="text" name="name" placeholder="Dein Name" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)" />
+<input type="email" name="email" placeholder="Deine E-Mail" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)" />
+<textarea name="message" rows="5" placeholder="Nachricht" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)"></textarea>
+<button class="btn primary" style="justify-content:center">Senden (bald)</button>
+</form>
+</div>
+</section>
+</main>
+<footer role="contentinfo"><div class="container">© <span id="y"></span> Visli</div></footer>
+<script src="/app.js" defer></script>
+</body>
+</html>

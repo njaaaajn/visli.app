@@ -939,3 +939,25 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   }
 }
 
+/* Preis-Karten robust ausrichten */
+.pricing { /* falls noch nicht vorhanden: Grid/Gap für Karten */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card.price {
+  display: flex;
+  flex-direction: column;       /* vertikaler Stack */
+  height: 100%;
+}
+
+.card.price .cta {
+  margin-top: auto;             /* Button nach unten schieben */
+}
+
+/* optionale Kleinigkeiten für saubere Abstände */
+.card.price ul { margin-bottom: 0; }
+.card.price small { display: block; margin-top: 6px; }
+
+

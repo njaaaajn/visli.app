@@ -768,19 +768,19 @@ html, body{ max-width: 100%; overflow-x: hidden; }
 }
 
 /* FAQ Desktop: Karten gleich hoch, saubere Ausrichtung */
+/* FAQ Desktop: Karten sauber strecken und gleich hoch darstellen */
 @media (min-width: 901px){
   .grid-3{ align-items: stretch; }
   .grid-3 details.card{
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
   .grid-3 details.card > summary{
     display: flex;
-    align-items: center;     /* zentriert Text vertikal */
-    /* min-height wird per JS gesetzt (equalize) */
+    align-items: center; /* vertikale Zentrierung */
+    /* min-height wird per JS gesetzt */
   }
-  /* Kein zusätzlicher vertikaler Abstand zwischen Karten in derselben Zeile */
-  details.card + details.card{ margin-top: 0; }
 }
 
 /* Mobile/Tablet: gestaffelter Abstand bleibt angenehm lesbar */

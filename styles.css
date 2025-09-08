@@ -234,12 +234,6 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .badge{white-space:normal}
 }
 
-/* Make comparison table scrollable on small screens */
-@media (max-width: 700px){
-  table{display:block; overflow-x:auto; white-space:nowrap}
-  thead, tbody, tr{display:table; width:100%}
-}
-
 /* ===== FINAL OVERRIDE: device frame ===== */
 /* Card um das Gerät: zentriert, nichts abschneiden */
 .mock{
@@ -606,6 +600,157 @@ details.card > summary:focus-visible{
   outline-offset: 2px;
   border-radius: 10px;
 }
+
+/* ==========================
+   MOBILE FIXES — FINAL (2025-09-08)
+   ========================== */
+
+/* Grundabstände auf Phones */
+@media (max-width: 720px){
+  .container{ padding: 0 16px; }
+}
+
+/* Banner: Full-bleed Hintergrund, Content mit Rand, robust gegen Zoom */
+.announcement{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  overflow: visible;
+}
+.announcement::before{
+  content:"";
+  position:absolute;
+  inset:0 calc(50% - 50vw);     /* Hintergrund bis zu den Viewporträndern */
+  background: var(--brand-2);
+  z-index: -1;
+}
+/* Auf sehr schmalen Screens kein sticky (verhindert Überschneiden) */
+@media (max-width: 720px){
+  .announcement{ position: relative; top: auto; }
+  .announcement .inner{ gap: 8px; flex-direction: column; align-items: stretch; }
+  .announcement .info{ font-size: 14px; line-height: 1.3; white-space: normal; }
+  .announcement .btn{ width: auto; align-self: flex-start; padding: 10px 14px; } /* NICHT volle Breite */
+}
+
+/* Hero: auf Mobile stapeln */
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; gap: 20px; }
+  .mock-phone{ order: 2; margin-top: 8px; }
+}
+
+/* Phone-Mock größer/luftiger auf Mobile */
+@media (max-width: 720px){
+  .mock-phone{ max-width: 400px; margin-left: auto; margin-right: auto; }
+  .device .screen{ top:12px; bottom:14px; left:10px; right:10px; border-radius: 20px; }
+  .device::before{ top:12px; height:10px; }
+  .device::after{ top:20px; height:5px; }
+}
+
+/* Vergleichstabelle: immer 2 Spalten, kein Scroll, schöne Umbrüche */
+table[aria-label="Vergleich Visli vs andere Apps"]{
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+table[aria-label="Vergleich Visli vs andere Apps"] thead th{
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 10px 14px;
+}
+table[aria-label="Vergleich Visli vs andere Apps"] th,
+table[aria-label="Vergleich Visli vs andere Apps"] td{
+  width: 50%;
+  padding: 14px 16px;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  text-align: left;
+}
+table[aria-label="Vergleich Visli vs andere Apps"] tbody tr{
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.08);
+}
+table[aria-label="Vergleich Visli vs andere Apps"] tbody tr td:first-child{
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-left: 3px solid var(--brand); /* Visli-Spalte highlighten */
+  font-weight: 600;
+}
+table[aria-label="Vergleich Visli vs andere Apps"] tbody tr td:last-child{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+@media (max-width: 720px){
+  table[aria-label="Vergleich Visli vs andere Apps"] th,
+  table[aria-label="Vergleich Visli vs andere Apps"] td{ padding: 12px; font-size: 14px; }
+  table[aria-label="Vergleich Visli vs andere Apps"] thead th{ font-size: 12px; }
+}
+
+/* Pricing: 1 Spalte auf Mobile, sauber linksbündig */
+@media (max-width: 860px){
+  .pricing{ grid-template-columns: 1fr; gap: 14px; }
+  .card.price{ text-align: left; }
+  .price .amount{ font-size: 32px; }
+  .price ul{ padding-left: 18px; }
+}
+
+/* FAQ: schönes Akkordeon mit Chevron und klarem Open-State */
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+}
+details.card{
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  background: var(--card);
+}
+details.card + details.card{ margin-top: 10px; }
+details.card > summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+details.card > summary::-webkit-details-marker{ display: none; }
+details.card > summary::after{
+  content: "";
+  width: 10px; height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .2s ease;
+  opacity: .9;
+}
+details.card[open] > summary::after{ transform: rotate(-135deg); }
+details.card[open] > summary{
+  background: rgba(255,255,255,.02);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+details.card > *:not(summary){
+  padding: 16px 18px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+/* Keine horizontale Page-Scrollerei auf Mobile */
+html, body{ max-width: 100%; overflow-x: hidden; }
+
+/* Falls der Inline-Block doch versehentlich noch drin ist, harte Overrides: */
+@media (max-width: 720px){
+  .announcement{ position: relative !important; top: auto !important; }
+}
+
 
 
 

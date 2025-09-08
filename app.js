@@ -49,3 +49,53 @@ const normalized = href.replace(/index\.html$/,'');
 if(normalized === path){ a.setAttribute('aria-current','page'); }
 });
 })();
+
+// =======================
+// FAQ: Desktop-Akkordeon + gleiche Höhe
+// =======================
+(function () {
+  const container = document.querySelector('.grid-3');
+  if (!container) return;
+
+  const mqDesktop = window.matchMedia('(min-width: 901px)');
+
+  // Nur-eins-offen-Logik (nur Desktop)
+  const onToggle = (e) => {
+    const d = e.target;
+    if (!(d instanceof HTMLDetailsElement)) return;
+    if (!mqDesktop.matches) return;         // nur auf Desktop
+    if (!d.open) return;                    // nur wenn eines geöffnet wird
+    container.querySelectorAll('details.card[open]').forEach(other => {
+      if (other !== d) other.open = false;
+    });
+    equalize(); // nach dem Umschalten Höhen neu berechnen
+  };
+
+  // Summary-Höhen angleichen (nur Desktop)
+  const equalize = () => {
+    const cards = Array.from(container.querySelectorAll('details.card'));
+    const summaries = cards.map(c => c.querySelector('summary')).filter(Boolean);
+    // zurücksetzen
+    summaries.forEach(s => { s.style.minHeight = ''; });
+    if (!mqDesktop.matches) return;
+    // max. Höhe messen (nach Fonts laden etc.)
+    let max = 0;
+    summaries.forEach(s => {
+      const h = s.getBoundingClientRect().height;
+      if (h > max) max = h;
+    });
+    summaries.forEach(s => { s.style.minHeight = Math.ceil(max) + 'px'; });
+  };
+
+  // Events
+  container.addEventListener('toggle', onToggle, true);
+  window.addEventListener('resize', equalize);
+  window.addEventListener('load', equalize);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(equalize);
+  } else {
+    // Fallback, falls document.fonts nicht verfügbar ist
+    setTimeout(equalize, 100);
+  }
+})();
+

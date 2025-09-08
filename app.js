@@ -16,8 +16,8 @@ const mobileNav = document.getElementById('mobile-nav');
 if(!toggle || !mobileNav) return;
 
 
-function open(){ mobileNav.removeAttribute('hidden'); toggle.setAttribute('aria-expanded','true'); }
-function close(){ mobileNav.setAttribute('hidden',''); toggle.setAttribute('aria-expanded','false'); }
+function open(){ mobileNav.removeAttribute('hidden'); toggle.setAttribute('aria-expanded','true'); document.body.classList.add('nav-open'); }
+function close(){ mobileNav.setAttribute('hidden',''); toggle.setAttribute('aria-expanded','false'); document.body.classList.remove('nav-open'); }
 
 
 toggle.addEventListener('click', ()=>{

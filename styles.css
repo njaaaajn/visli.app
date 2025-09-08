@@ -852,54 +852,37 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   .faq-q { /* min-height wird via JS gesetzt */ }
 }
 
-/* ===== Announcement: Smartphone-Typo & Layout ===== */
+/* ===== Announcement: Smartphone komplett zentrieren ===== */
 @media (max-width: 720px){
   .announcement{
-    position: relative;                 /* kein sticky auf sehr schmalen Screens */
+    position: relative;
     top: auto;
     padding-top: calc(10px + env(safe-area-inset-top, 0px));
     padding-bottom: 10px;
   }
   .announcement .inner{
     display: flex;
-    flex-direction: column;             /* Text über Button */
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;     /* zentriert alle Kinder horizontal */
     gap: 8px;
+    text-align: center;      /* Text innerhalb zentrieren */
   }
-
-  /* Textblock schön umbrechen */
   .announcement .info{
     display: grid;
-    grid-template-columns: 1fr;         /* zwei Zeilen statt in einer Reihe */
-    row-gap: 2px;
-    font-size: 14px;
-    line-height: 1.35;
+    grid-auto-rows: min-content;
+    row-gap: 4px;
+    justify-items: center;   /* jede Zeile zentriert */
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: auto;
+    font-size: 14px;
+    line-height: 1.4;
   }
-  .announcement .info span[aria-hidden="true"]{ display:none } /* trenner-Punkt ausblenden */
-  .announcement .info span:first-child{
-    font-weight: 700;                   /* „🎉 Release am 15. Oktober“ betonen */
-    letter-spacing: .02em;
-  }
-  .announcement .info span:last-child{
-    opacity:.95;                         /* Subline leicht ruhiger */
-  }
-
-  /* Button kompakt, NICHT volle Breite */
+  .announcement .info span[aria-hidden="true"]{ display: none; } /* Punkt ausblenden */
   .announcement .btn.small{
-    align-self: flex-start;
+    align-self: center;      /* Button mittig */
+    width: auto;             /* nicht volle Breite */
     padding: 10px 14px;
-    width: auto;
   }
 }
-
-
-
-
-
-
-
-

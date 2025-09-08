@@ -29,7 +29,7 @@ FILE: /kontakt.html
 <input type="text" name="name" placeholder="Dein Name" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)" />
 <input type="email" name="email" placeholder="Deine E-Mail" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)" />
 <textarea name="message" rows="5" placeholder="Nachricht" required style="padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1016;color:var(--text)"></textarea>
-<button class="btn primary" style="justify-content:center">Senden (bald)</button>
+<button class="btn primary" style="justify-content:center">Senden</button>
 </form>
 </div>
 </section>

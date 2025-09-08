@@ -51,40 +51,38 @@ if(normalized === path){ a.setAttribute('aria-current','page'); }
 })();
 
 // =======================
-// FAQ: Desktop – nur 1 offen + gleiche Summary-Höhe
+// FAQ: immer nur 1 offen + Summary-Höhe angleichen
 // =======================
 (function () {
+  // Wenn du das FAQ gezielt scopen willst, gib dem Container ein ID (#faq-list)
+  // und nimm stattdessen: const container = document.querySelector('#faq-list');
   const container = document.querySelector('.grid-3');
   if (!container) return;
 
-  const mqDesktop = window.matchMedia('(min-width: 901px)');
   const items = Array.from(container.querySelectorAll('details.card'));
 
-  // Nur-eins-offen per native 'toggle' auf JEDEM details
+  // Alle geschlossen starten (falls Browser-State/Caching sie offen ließ)
+  items.forEach(d => { d.open = false; });
+
+  // Beim Öffnen eines Elements alle anderen schließen (ohne MediaQuery)
   items.forEach(d => {
     d.addEventListener('toggle', () => {
-      if (mqDesktop.matches && d.open) {
-        items.forEach(o => { if (o !== d) o.open = false; });
-      }
-      // Nach jeder Änderung neu ausgleichen
+      if (d.open) items.forEach(o => { if (o !== d) o.open = false; });
       requestAnimationFrame(equalizeFAQ);
     });
   });
 
-  // Summary-Höhen angleichen (nur Desktop)
+  // Summary-Höhen angleichen (nur auf „echtem“ Desktop sinnvoll)
   function equalizeFAQ() {
     const summaries = items.map(i => i.querySelector('summary')).filter(Boolean);
-    summaries.forEach(s => s.style.minHeight = ''); // reset
-    if (!mqDesktop.matches || !summaries.length) return;
-
+    summaries.forEach(s => s.style.minHeight = ''); // Reset
+    if (!window.matchMedia('(min-width: 901px)').matches) return;
     let max = 0;
     summaries.forEach(s => { max = Math.max(max, s.getBoundingClientRect().height); });
     summaries.forEach(s => { s.style.minHeight = Math.ceil(max) + 'px'; });
   }
 
-  // Initial & Reflow
   window.addEventListener('load', equalizeFAQ);
   window.addEventListener('resize', () => requestAnimationFrame(equalizeFAQ));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeFAQ);
 })();
-

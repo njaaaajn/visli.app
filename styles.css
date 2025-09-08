@@ -381,4 +381,109 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .announcement .info{ font-size: 13px; }
 }
 
+/* ==========================
+   MOBILE FIX PACK (2025-09-08)
+   ========================== */
+
+/* 0) Grundabstände auf Phones */
+@media (max-width: 720px){
+  .container{ padding: 0 16px; }
+}
+
+/* 1) Announcement: Full-bleed Hintergrund + Content mit Rand,
+      robust gegen Zoom-Glitches; Button nicht volle Breite */
+.announcement{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  overflow: visible;
+}
+.announcement::before{
+  content:"";
+  position:absolute;
+  inset:0 calc(50% - 50vw);        /* Hintergrund bis an die Viewport-Ränder */
+  background: var(--brand-2);
+  z-index: -1;
+}
+@media (max-width: 720px){
+  .announcement{ position: relative; } /* kein Sticky auf sehr schmalen Screens */
+  .announcement .inner{ gap: 8px; flex-direction: column; align-items: stretch; }
+  .announcement .info{ font-size: 14px; line-height: 1.3; white-space: normal; }
+  .announcement .btn{ width: auto !important; align-self: flex-start; padding: 10px 14px; }
+}
+
+/* 2) Hero-Layout auf Phones stacken */
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; gap: 20px; }
+  .mock-phone{ order: 2; margin-top: 8px; }
+}
+
+/* 3) Phone-Mock: Screen größer auf Phones */
+@media (max-width: 720px){
+  .mock-phone{ max-width: 400px; margin-left: auto; margin-right: auto; }
+  .device .screen{
+    top:12px; bottom:14px; left:10px; right:10px;
+    border-radius: 20px;
+  }
+  .device::before{ top:12px; height:10px; }
+  .device::after{ top:20px; height:5px; }
+}
+
+/* 4) Vergleichstabelle: horizontal scrollbar + sauberes Alignment */
+section table{ width: 100%; }
+@media (max-width: 760px){
+  section table{
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-spacing: 0 10px;         /* beibehalten, aber als Block */
+    margin: 0;
+  }
+  section thead, section tbody, section tr{ display: table; width: 100%; }
+  section th, section td{
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: left;
+  }
+  section tbody tr td:first-child{ padding-left: 16px; }
+  section tbody tr td:last-child{ padding-right: 16px; }
+}
+
+/* 5) Pricing: 1 Spalte auf Mobile + konsistente Typo */
+@media (max-width: 860px){
+  .pricing{ grid-template-columns: 1fr; gap: 14px; }
+  .card.price{ text-align: left; }
+  .price .amount{ font-size: 32px; }
+  .price ul{ padding-left: 18px; }
+}
+
+/* 6) FAQ <details>: größere Tap-Ziele & schöner Open-State */
+details.card{ padding: 0; overflow: hidden; }
+details.card > summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 18px;
+  font-weight: 600;
+}
+details.card > summary::-webkit-details-marker{ display: none; }
+details.card[open] > summary{
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+details.card > p{
+  padding: 16px 18px;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* 7) Kleinere Typo/Spacing-Finetunes */
+@media (max-width: 720px){
+  .section-title{ font-size: 24px; }
+  .section-text{ font-size: 15px; }
+  .templates{ gap: 12px; }
+}
+
+/* 8) Verhindert horizontales Page-Scrolling durch Full-Bleed-Elemente */
+html, body{ max-width: 100%; overflow-x: hidden; }
+
+
 

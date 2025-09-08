@@ -31,6 +31,15 @@
   <link rel="preload" href="/styles.css" as="style">
   <link rel="stylesheet" href="/styles.css">
 
+  <!-- Page-specific tiny additions -->
+  <style>
+    .announcement{background:var(--brand-2);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:1000}
+    .announcement .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;flex-wrap:wrap}
+    .announcement .info{display:flex;align-items:center;gap:10px;font-weight:600}
+    .btn.small{padding:8px 12px;font-size:.92rem;line-height:1}
+    .btn.disabled, .btn[aria-disabled="true"]{opacity:.5;pointer-events:none;cursor:not-allowed}
+  </style>
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -57,6 +66,18 @@
 </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Zum Inhalt springen</a>
+
+  <!-- TOP ANNOUNCEMENT -->
+  <div class="announcement" role="region" aria-label="Release-Ankündigung">
+    <div class="container inner">
+      <div class="info">
+        <span>🎉 Release am <strong>15. Oktober</strong></span>
+        <span aria-hidden="true">·</span>
+        <span>Vorabtest läuft – sichere dir einen Platz</span>
+      </div>
+      <a class="btn small primary" href="mailto:hello@visli.app?subject=Visli%20Warteliste">Warteliste</a>
+    </div>
+  </div>
 
   <header role="banner">
     <div class="container nav">
@@ -115,8 +136,9 @@
           <h1 class="title">Nicht um dich zu verändern. <br>Um dich festzuhalten.</h1>
           <p class="subtitle">Momente statt endloser Tracker – privat, offline, ohne Cloud. Erstelle kleine, abgeschlossene Kapitel deines Lebens und sieh sie als klare, ansprechende Visualisierungen.</p>
           <div class="cta">
-            <a class="btn primary" href="mailto:hello@visli.app?subject=Visli%20Warteliste">Warteliste</a>
-            <a class="btn" href="/wie-funktioniert.html">So funktioniert’s</a>
+            <!-- Direkt zum Play Store – derzeit deaktiviert, bis die Seite live ist -->
+            <a class="btn primary disabled" aria-disabled="true" href="#"
+               title="Bald verfügbar im Play Store">App herunterladen</a>
           </div>
           <div style="margin-top:14px"><span class="badge">🔒 Keine Cloud · Kein Login · Keine Werbung</span></div>
         </div>
@@ -134,6 +156,10 @@
       <div class="container">
         <h2 class="section-title">Momente statt endloser Tracker</h2>
         <p class="section-text">Visli ist ein Ort, an dem du einzelne Lebensmomente festhältst – nicht zur Analyse oder Optimierung, sondern als kleine, abgeschlossene Kapitel. Eine Zahl, ein Wort, ein Gefühl – alles kann ein Augenblick sein. Am Ende steht ein visuelles Diagramm, das sagt: „Das war mein Moment.“</p>
+        <!-- "So funktioniert’s" jetzt hier -->
+        <div class="cta" style="margin-top:12px">
+          <a class="btn" href="/wie-funktioniert.html">So funktioniert’s</a>
+        </div>
       </div>
     </section>
 
@@ -168,10 +194,7 @@
             <div class="tags"><span class="tag">Was genau + Wie viel</span><span class="tag">Diagramm: Kreis</span></div>
           </article>
         </div>
-        <div class="cta" style="margin-top:16px">
-          <a class="btn primary" href="/vorlagen.html">Alle Vorlagen ansehen</a>
-          <a class="btn" href="/wie-funktioniert.html">So funktioniert’s</a>
-        </div>
+        <!-- CTA im Vorlagen-Abschnitt entfernt -->
       </div>
     </section>
 
@@ -269,12 +292,5 @@
       </nav>
     </div>
   </footer>
-
-  <script src="/app.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('y').textContent = new Date().getFullYear();
-    });
-  </script>
 </body>
 </html>

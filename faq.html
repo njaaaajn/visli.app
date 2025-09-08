@@ -1,47 +1,57 @@
-<!-- ========================================= 
-FILE: /faq.html  (Ausschnitt)
+<!-- =========================================
+FILE: /faq.html
 ========================================= -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ | Visli</title>
+  <meta name="description" content="Häufige Fragen zu Visli: Account, Momente, Teilen & Export." />
+  <link rel="canonical" href="https://visli.app/faq.html" />
+  <link rel="alternate" hreflang="de" href="https://visli.app/faq.html" />
+  <link rel="alternate" hreflang="en" href="https://visli.app/en/faq.html" />
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 <header role="banner">
   <div class="container nav">
     <a href="/" class="logo" aria-label="Startseite">
-      <img src="/ic_launcher-playstore.png" alt="Visli" class="logo-img" width="26" height="26" />
+      <img src="/ic_launcher-playstore.png" alt="Visli Logo" class="logo-img" width="26" height="26" />
       <span>Visli</span>
     </a>
-    <nav class="nav-links"><a href="/preise.html">Preise</a><a href="/datenschutz.html">Datenschutz</a></nav>
+    <nav class="nav-links">
+      <a href="/preise.html">Preise</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </nav>
   </div>
 </header>
 
 <main id="main">
-  <section class="container" id="faq">
+  <section class="container">
     <h1 class="section-title">Häufige Fragen (FAQ)</h1>
+    <div class="grid-3">
+      <details class="card" open>
+        <summary>Brauche ich einen Account?</summary>
+        <p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p>
+      </details>
 
-    <div class="grid-3 faq-grid">
-      <article class="card faq-item">
-        <button class="faq-q" type="button" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">
-          Brauche ich einen Account?
-        </button>
-        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
-          <p>Nein. Du kannst sofort starten – ohne Anmeldung. Alles bleibt lokal auf deinem Gerät.</p>
-        </div>
-      </article>
+      <details class="card">
+        <summary>Was ist ein „Moment“?</summary>
+        <p>Ein Moment ist ein bewusst begrenzter Zeitraum mit einem klaren Abschluss – kein Endlos-Tracker.</p>
+      </details>
 
-      <article class="card faq-item">
-        <button class="faq-q" type="button" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
-          Was ist ein „Moment“?
-        </button>
-        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2" hidden>
-          <p>Ein Moment ist ein bewusst begrenzter Zeitraum mit einem klaren Abschluss – kein Endlos-Tracker.</p>
-        </div>
-      </article>
-
-      <article class="card faq-item">
-        <button class="faq-q" type="button" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
-          Kann ich etwas teilen oder exportieren?
-        </button>
-        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3" hidden>
-          <p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p>
-        </div>
-      </article>
+      <details class="card">
+        <summary>Kann ich etwas teilen oder exportieren?</summary>
+        <p>Ja. Du kannst Visualisierungen als Bild exportieren und – wenn du willst – teilen. Ganz ohne Cloud-Zwang.</p>
+      </details>
     </div>
   </section>
 </main>
+
+<footer role="contentinfo">
+  <div class="container">© <span id="y"></span> Visli</div>
+</footer>
+<script src="/app.js" defer></script>
+</body>
+</html>

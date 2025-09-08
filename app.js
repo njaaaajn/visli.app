@@ -51,48 +51,38 @@ if(normalized === path){ a.setAttribute('aria-current','page'); }
 })();
 
 // =======================
-// FAQ: Desktop – Single Open + gleiche Summary-Höhe
+// FAQ: Desktop – nur 1 offen + gleiche Summary-Höhe
 // =======================
 (function () {
   const container = document.querySelector('.grid-3');
   if (!container) return;
 
   const mqDesktop = window.matchMedia('(min-width: 901px)');
+  const items = Array.from(container.querySelectorAll('details.card'));
 
-  // 1) Nur-eins-offen: via Klick auf <summary> (zuverlässiger als 'toggle')
-  document.addEventListener('click', (ev) => {
-    const summary = ev.target.closest('details.card > summary');
-    if (!summary) return;
-
-    const d = summary.parentElement; // <details>
-    if (mqDesktop.matches) {
-      container.querySelectorAll('details.card[open]').forEach(other => {
-        if (other !== d) other.removeAttribute('open');
-      });
-    }
-
-    // Höhe nach Klick neu berechnen (nachdem der Browser getoggelt hat)
-    setTimeout(equalizeFAQ, 0);
+  // Nur-eins-offen per native 'toggle' auf JEDEM details
+  items.forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (mqDesktop.matches && d.open) {
+        items.forEach(o => { if (o !== d) o.open = false; });
+      }
+      // Nach jeder Änderung neu ausgleichen
+      requestAnimationFrame(equalizeFAQ);
+    });
   });
 
-  // 2) Summary-Höhen angleichen (nur Desktop)
+  // Summary-Höhen angleichen (nur Desktop)
   function equalizeFAQ() {
-    const summaries = Array.from(container.querySelectorAll('details.card > summary'));
-    // zurücksetzen
-    summaries.forEach(s => s.style.minHeight = '');
-
+    const summaries = items.map(i => i.querySelector('summary')).filter(Boolean);
+    summaries.forEach(s => s.style.minHeight = ''); // reset
     if (!mqDesktop.matches || !summaries.length) return;
 
     let max = 0;
-    summaries.forEach(s => {
-      const h = s.getBoundingClientRect().height;
-      if (h > max) max = h;
-    });
-    const minH = Math.ceil(max) + 'px';
-    summaries.forEach(s => s.style.minHeight = minH);
+    summaries.forEach(s => { max = Math.max(max, s.getBoundingClientRect().height); });
+    summaries.forEach(s => { s.style.minHeight = Math.ceil(max) + 'px'; });
   }
 
-  // Initial + bei Resizes/Schriftladen
+  // Initial & Reflow
   window.addEventListener('load', equalizeFAQ);
   window.addEventListener('resize', () => requestAnimationFrame(equalizeFAQ));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalizeFAQ);

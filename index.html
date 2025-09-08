@@ -291,5 +291,12 @@
       </nav>
     </div>
   </footer>
+  <script src="/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('y');
+      if(y) y.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>

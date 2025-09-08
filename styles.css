@@ -189,7 +189,7 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   .nav-links{display:none}
   .nav-cta{display:none}
   .menu-toggle{display:inline-flex;flex-direction:column}
-
+   body.nav-open header{ z-index: 1200; } /* hebt Mobile-Menü über das Announcement */
   /* 👉 WICHTIG: Mobile-Menü sichtbar machen, wenn nicht hidden */
   .mobile-nav{
     display:flex;                   /* war global: none */
@@ -204,6 +204,10 @@ footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.
   }
   .mobile-nav a:last-child{ border-bottom:none }
 }
+
+
+
+
 
 /* Compact header & hero on small phones */
 @media (max-width: 720px){

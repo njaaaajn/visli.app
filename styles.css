@@ -852,6 +852,51 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   .faq-q { /* min-height wird via JS gesetzt */ }
 }
 
+/* ===== Announcement: Smartphone-Typo & Layout ===== */
+@media (max-width: 720px){
+  .announcement{
+    position: relative;                 /* kein sticky auf sehr schmalen Screens */
+    top: auto;
+    padding-top: calc(10px + env(safe-area-inset-top, 0px));
+    padding-bottom: 10px;
+  }
+  .announcement .inner{
+    display: flex;
+    flex-direction: column;             /* Text über Button */
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Textblock schön umbrechen */
+  .announcement .info{
+    display: grid;
+    grid-template-columns: 1fr;         /* zwei Zeilen statt in einer Reihe */
+    row-gap: 2px;
+    font-size: 14px;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  .announcement .info span[aria-hidden="true"]{ display:none } /* trenner-Punkt ausblenden */
+  .announcement .info span:first-child{
+    font-weight: 700;                   /* „🎉 Release am 15. Oktober“ betonen */
+    letter-spacing: .02em;
+  }
+  .announcement .info span:last-child{
+    opacity:.95;                         /* Subline leicht ruhiger */
+  }
+
+  /* Button kompakt, NICHT volle Breite */
+  .announcement .btn.small{
+    align-self: flex-start;
+    padding: 10px 14px;
+    width: auto;
+  }
+}
+
+
 
 
 

@@ -57,6 +57,46 @@ section{padding:64px 0}
 .mock{border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);position:relative}
 .mock-phone{aspect-ratio:9/19}
 
+/* Device frame (CSS-only) */
+.device{
+  --w: 320px;                 /* Basisbreite; skaliert über Elternlayout */
+  width: min(100%, var(--w));
+  aspect-ratio: 9 / 19.5;
+  border-radius: 36px;
+  background: #0b0b0b;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 6px #111;
+  position: relative;
+  padding: 14px;              /* Rahmenstärke */
+}
+.device::before{
+  /* Notch */
+  content:"";
+  position:absolute;
+  top:10px; left:50%;
+  width: 120px; height: 24px;
+  transform: translateX(-50%);
+  background:#0b0b0b;
+  border-bottom-left-radius:14px;
+  border-bottom-right-radius:14px;
+}
+.device::after{
+  /* Lautsprecher-Slot (dekorativ) */
+  content:"";
+  position:absolute;
+  top:16px; left:50%;
+  width: 48px; height: 6px;
+  transform: translateX(-50%);
+  background:#1b1b1b;
+  border-radius:999px;
+}
+.device .screen{
+  display:block;
+  width:100%; height:100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+
 
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}

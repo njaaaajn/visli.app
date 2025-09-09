@@ -981,5 +981,64 @@ html, body{ max-width: 100%; overflow-x: hidden; }
   }
 }
 
+/* ===== Comparison table (EN) — same look as DE ===== */
+table[aria-label="Visli vs other apps comparison"]{
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+table[aria-label="Visli vs other apps comparison"] thead th{
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 10px 14px;
+}
+table[aria-label="Visli vs other apps comparison"] th,
+table[aria-label="Visli vs other apps comparison"] td{
+  width: 50%;
+  padding: 14px 16px;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  text-align: left;
+}
+table[aria-label="Visli vs other apps comparison"] tbody tr{
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.08);
+}
+table[aria-label="Visli vs other apps comparison"] tbody tr td:first-child{
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-left: 3px solid var(--brand); /* highlight left column like DE */
+  font-weight: 600;
+}
+table[aria-label="Visli vs other apps comparison"] tbody tr td:last-child{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* mobile tweaks */
+@media (max-width: 720px){
+  table[aria-label="Visli vs other apps comparison"] th,
+  table[aria-label="Visli vs other apps comparison"] td{
+    padding: 12px; font-size: 14px;
+  }
+  table[aria-label="Visli vs other apps comparison"] thead th{ font-size: 12px; }
+}
+
+/* override any earlier "scrollable table" rules */
+@media (max-width: 700px){
+  table[aria-label="Visli vs other apps comparison"]{
+    display: table !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+}
+
+
 
 

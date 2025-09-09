@@ -117,28 +117,53 @@
 
   <main id="main" role="main">
     <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="kicker">Digitales Lebensarchiv</p>
-          <div class="badge">🚀 Coming Soon</div>
-          <h1 class="title">Nicht um dich zu verändern. <br>Um dich festzuhalten.</h1>
-          <p class="subtitle">Momente statt endloser Tracker – privat, offline, ohne Cloud. Erstelle kleine, abgeschlossene Kapitel deines Lebens und sieh sie als klare, ansprechende Visualisierungen.</p>
-          <div class="cta">
-            <!-- Direkt zum Play Store – derzeit deaktiviert, bis die Seite live ist -->
-            <a class="btn primary disabled" aria-disabled="true" href="#"
-               title="Bald verfügbar im Play Store">App herunterladen</a>
-          </div>
-          <div style="margin-top:14px"><span class="badge">🔒 Keine Cloud · Kein Login · Keine Werbung</span></div>
-        </div>
-        <div class="mock mock-phone" aria-hidden="true">
-          <!-- Phone Mockup / Placeholder -->
-          <div class="device">
-            <img class="screen" src="/assets/screenshot-hero-de@2x.png" alt="">
-          </div>
-        </div>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="kicker">Digitales Lebensarchiv</p>
+
+      <!-- Badge sollte inline sein -->
+      <span class="badge">🚀 Coming Soon</span>
+
+      <h1 class="title">Nicht um dich zu verändern. <br>Um dich festzuhalten.</h1>
+
+      <p class="subtitle">
+        Momente statt endloser Tracker – privat, offline, ohne Cloud.
+        Erstelle kleine, abgeschlossene Kapitel deines Lebens und sieh sie
+        als klare, ansprechende Visualisierungen.
+      </p>
+
+      <div class="cta">
+        <!-- Disabled-Button korrekt gekennzeichnet -->
+        <a class="btn primary disabled"
+           href="#"
+           role="button"
+           aria-disabled="true"
+           tabindex="-1"
+           title="Bald verfügbar im Play Store">App herunterladen</a>
       </div>
-    </section>
+
+      <!-- USP-Badge -->
+      <div class="cta" style="margin-top:14px">
+        <span class="badge">🔒 Keine Cloud · Kein Login · Keine Werbung</span>
+      </div>
+
+      <!-- Sprach-/Dark-Mode-Badges -->
+      <div class="cta" style="margin-top:8px" aria-label="App-Unterstützung">
+        <span class="badge">🌍 Deutsch &amp; Englisch</span>
+        <span class="badge">🌓 Dark-Mode unterstützt</span>
+      </div>
+    </div>
+
+    <div class="mock mock-phone" aria-hidden="true">
+      <div class="device">
+        <!-- dekorativ: leeres alt -->
+        <img class="screen" src="/assets/screenshot-hero-de@2x.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- WAS IST VISLI -->
     <section>

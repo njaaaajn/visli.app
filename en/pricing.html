@@ -4,52 +4,82 @@ FILE: /en/pricing.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pricing | Visli</title>
-<meta name="description" content="Visli pricing: a free basic plan and an affordable Pro subscription for unlimited moments." />
-<link rel="canonical" href="https://visli.app/en/pricing.html" />
-<link rel="alternate" hreflang="en" href="https://visli.app/en/pricing.html" />
-<link rel="alternate" hreflang="de" href="https://visli.app/preise.html" />
-<link rel="stylesheet" href="/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing | Visli</title>
+  <meta name="description" content="Pricing for Visli: free basic version and affordable Pro plan for unlimited moments." />
+  <link rel="canonical" href="https://visli.app/en/pricing.html" />
+  <link rel="alternate" hreflang="en" href="https://visli.app/en/pricing.html" />
+  <link rel="alternate" hreflang="de" href="https://visli.app/preise.html" />
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .price-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      gap: 1rem;
+    }
+    .price-footer small {
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
 <header role="banner">
-<div class="container nav">
-<a href="/en/" class="logo"><img src="/assets/logo.png" alt="Visli logo" class="logo-img" />Visli</a>
-<nav class="nav-links"><a href="/en/faq.html">FAQ</a><a href="/en/privacy.html">Privacy</a></nav>
-</div>
+  <div class="container nav">
+    <a href="/en/" class="logo" aria-label="Homepage">
+      <img src="/ic_launcher-playstore.png" alt="Visli" class="logo-img" width="26" height="26" />
+      <span>Visli</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/en/faq.html">FAQ</a>
+      <a href="/en/privacy.html">Privacy</a>
+    </nav>
+  </div>
 </header>
+
 <main id="main">
-<section class="container">
-<h1 class="section-title">Pricing</h1>
-<div class="pricing">
-<div class="card price">
-<h3>Free</h3>
-<div class="amount">€0</div>
-<ul>
-<li>3 moments at a time</li>
-<li>Template library (basic)</li>
-<li>All core features</li>
-</ul>
-<small style="color:var(--muted)">incl. VAT, cancel anytime</small>
-<div class="cta" style="margin-top:14px"><a class="btn" href="/en/download.html">Get started</a></div>
-</div>
-<div class="card price" style="border:1px solid rgba(122,162,255,.5)">
-<h3>Pro</h3>
-<div class="amount">€1 / month</div>
-<ul>
-<li>Unlimited moments</li>
-<li>All templates & designs</li>
-<li>Planned closing flow</li>
-</ul>
-<small style="color:var(--muted)">incl. VAT, monthly cancel</small>
-<div class="cta" style="margin-top:14px"><a class="btn primary" href="/en/download.html">Get Pro</a></div>
-</div>
-</div>
-</section>
+  <section class="container">
+    <h1 class="section-title">Pricing</h1>
+
+    <div class="pricing">
+      <!-- Card: Free -->
+      <div class="card price">
+        <h3>Free</h3>
+        <div class="amount">€0</div>
+        <ul>
+          <li>3 moments at once</li>
+          <li>Template library (Basic)</li>
+          <li>All core features</li>
+        </ul>
+        <div class="price-footer">
+          <small>&nbsp;</small>
+          <a class="btn" href="/en/#announcement">Get started</a>
+        </div>
+      </div>
+
+      <!-- Card: Pro -->
+      <div class="card price" style="border:1px solid rgba(122,162,255,.5)">
+        <h3>Pro</h3>
+        <div class="amount">€1 / month</div>
+        <ul>
+          <li>Unlimited moments</li>
+          <li>All templates</li>
+          <li>All Vislis</li>
+        </ul>
+        <div class="price-footer">
+          <small>incl. VAT, cancel monthly</small>
+          <a class="btn primary" href="/en/#announcement">Get Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer role="contentinfo"><div class="container">© <span id="y"></span> Visli</div></footer>
+
+<footer role="contentinfo">
+  <div class="container">© <span id="y"></span> Visli</div>
+</footer>
 <script src="/app.js" defer></script>
 </body>
 </html>

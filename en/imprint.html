@@ -4,41 +4,92 @@ FILE: /en/imprint.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Imprint | Visli</title>
-<meta name="description" content="Imprint of Visli." />
-<link rel="canonical" href="https://visli.app/en/imprint.html" />
-<link rel="alternate" hreflang="en" href="https://visli.app/en/imprint.html" />
-<link rel="alternate" hreflang="de" href="https://visli.app/impressum.html" />
-<link rel="stylesheet" href="/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Imprint | Visli</title>
+  <meta name="description" content="Imprint / Legal Notice of Visli." />
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://visli.app/en/imprint.html" />
+  <link rel="alternate" hreflang="en" href="https://visli.app/en/imprint.html" />
+  <link rel="alternate" hreflang="de" href="https://visli.app/impressum.html" />
+  <meta name="theme-color" content="#121212">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://visli.app/en/imprint.html">
+  <meta property="og:title" content="Imprint | Visli">
+  <meta property="og:description" content="Imprint / Legal Notice of Visli.">
+  <meta property="og:image" content="https://visli.app/assets/og-image.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Imprint | Visli">
+  <meta name="twitter:description" content="Imprint / Legal Notice of Visli.">
+  <meta name="twitter:image" content="https://visli.app/assets/og-image.jpg">
+
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<header role="banner">
-<div class="container nav">
-<a href="/en/" class="logo" aria-label="Homepage">
-  <img src="/assets/logo.png" alt="Visli logo" class="logo-img" />Visli
-</a>
-<nav class="nav-links">
-  <a href="/en/privacy.html">Privacy</a>
-  <a href="/en/terms.html">Terms</a>
-</nav>
-</div>
-</header>
-<main id="main">
-<section class="container">
-<h1 class="section-title">Imprint</h1>
-<p class="section-text">This page is a placeholder. Please insert your correct details:</p>
-<p><strong>Provider:</strong> Daniel Weigelt<br>
-Rheinfelsstr. 7, 7000 Chur<br>
-info[@]visli.app</p>
-<p><strong>VAT ID:</strong> [if applicable]</p>
-<p><strong>Responsible for content:</strong> Daniel Weigelt</p>
-</section>
-</main>
-<footer role="contentinfo">
-  <div class="container">© <span id="y"></span> Visli</div>
-</footer>
-<script src="/app.js" defer></script>
+  <a href="#main" class="visually-hidden-focusable">Skip to content</a>
+
+  <header role="banner">
+    <div class="container nav">
+      <a href="/en/" class="logo" aria-label="Homepage">
+        <img src="/ic_launcher-playstore.png" alt="Visli Logo" class="logo-img" width="26" height="26" />
+        <span>Visli</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/en/faq.html">FAQ</a>
+        <a href="/en/privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section class="container">
+      <h1 class="section-title">Imprint / Legal Notice</h1>
+
+      <p>
+        <strong>Provider of this website:</strong><br>
+        Daniel Weigelt<br>
+        Rheinfelsstr., 7<br>
+        7000 Chur<br>
+        Switzerland
+      </p>
+
+      <p>
+        <strong>Contact:</strong><br>
+        <a href="mailto:info@visli.app">info@visli.app</a>
+      </p>
+
+      <p>
+        <strong>Responsible for content:</strong><br>
+        Daniel Weigelt, at the address above
+      </p>
+
+      <p>
+        <strong>VAT information:</strong><br>
+        As a provider based in Switzerland, I am currently not subject to VAT and therefore do not have a VAT identification number.
+      </p>
+
+      <p>
+        <strong>Liability for links:</strong><br>
+        Despite careful content control, I assume no liability for external links. The operators of the linked pages are solely responsible for their content.
+      </p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">© <span id="y"></span> Visli</div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('y');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>
